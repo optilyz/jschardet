@@ -136,7 +136,8 @@ jschardet.UniversalDetector = function() {
                 this._mCharsetProbers = [
                     new jschardet.MBCSGroupProber(),
                     new jschardet.SBCSGroupProber(),
-                    new jschardet.Latin1Prober()
+                    new jschardet.Latin1Prober(),
+                    new jschardet.MacRomanProber()
                 ];
             }
             for( var i = 0, prober; prober = this._mCharsetProbers[i]; i++ ) {

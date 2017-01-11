@@ -40,7 +40,7 @@
     var ASV = 6; // accent small vowel
     var ASO = 7; // accent small other
 
-    jschardet.Latin1_CharToClass = [
+    jschardet.MacRoman_CharToClass = [
       OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   // 00 - 07
       OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   // 08 - 0F
       OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   // 10 - 17
@@ -57,29 +57,29 @@
       ASS, ASS, ASS, ASS, ASS, ASS, ASS, ASS,   // 68 - 6F
       ASS, ASS, ASS, ASS, ASS, ASS, ASS, ASS,   // 70 - 77
       ASS, ASS, ASS, OTH, OTH, OTH, OTH, OTH,   // 78 - 7F
-      OTH, UDF, OTH, ASO, OTH, OTH, OTH, OTH,   // 80 - 87
-      OTH, OTH, ACO, OTH, ACO, UDF, ACO, UDF,   // 88 - 8F
-      UDF, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   // 90 - 97
-      OTH, OTH, ASO, OTH, ASO, UDF, ASO, ACO,   // 98 - 9F
-      OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   // A0 - A7
-      OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   // A8 - AF
+      ACV, ACV, ACO, ACV, ACO, ACV, ACV, ACV,   // 80 - 87
+      ACV, ACV, ACV, ACV, ACV, ACO, ACV, ACV,   // 88 - 8F
+      ASV, ACV, ACV, ACV, ACV, ACV, ACO, ACV,   // 90 - 97
+      ACV, ACV, ACV, ACV, ACV, ACV, ACV, ACV,   // 98 - 9F
+      OTH, OTH, OTH, OTH, OTH, OTH, OTH, ACO,   // A0 - A7
+      OTH, OTH, OTH, OTH, OTH, OTH, ACO, ACV,   // A8 - AF
       OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   // B0 - B7
-      OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   // B8 - BF
-      ACV, ACV, ACV, ACV, ACV, ACV, ACO, ACO,   // C0 - C7
-      ACV, ACV, ACV, ACV, ACV, ACV, ACV, ACV,   // C8 - CF
-      ACO, ACO, ACV, ACV, ACV, ACV, ACV, OTH,   // D0 - D7
-      ACV, ACV, ACV, ACV, ACV, ACO, ACO, ACO,   // D8 - DF
-      ASV, ASV, ASV, ASV, ASV, ASV, ASO, ASO,   // E0 - E7
-      ASV, ASV, ASV, ASV, ASV, ASV, ASV, ASV,   // E8 - EF
-      ASO, ASO, ASV, ASV, ASV, ASV, ASV, OTH,   // F0 - F7
-      ASV, ASV, ASV, ASV, ASV, ASO, ASO, ASO    // F8 - FF
+      OTH, OTH, OTH, OTH, OTH, OTH, ACO, ACV,   // B8 - BF
+      OTH, OTH, OTH, ASO, ASO, OTH, OTH, OTH,   // C0 - C7
+      OTH, OTH, OTH, ACV, ACV, ACV, ACO, ACO,   // C8 - CF
+      OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH,   // D0 - D7
+      ACO, ACO, OTH, OTH, OTH, OTH, ACO, ACO,   // D8 - DF
+      OTH, OTH, OTH, OTH, OTH, ACV, OTH, ACV,   // E0 - E7
+      ACV, ACV, ACV, ACV, ACV, ACV, ACV, ACV,   // E8 - EF
+      OTH, ACV, ACV, ACV, ACV, OTH, OTH, OTH,   // F0 - F7
+      OTH, OTH, OTH, OTH, OTH, OTH, OTH, OTH    // F8 - FF
     ];
 
     // 0 : illegal
     // 1 : very unlikely
     // 2 : normal
     // 3 : very likely
-    jschardet.Latin1ClassModel = [
+    jschardet.MacRomanClassModel = [
     // UDF OTH ASC ASS ACV ACO ASV ASO
        0,  0,  0,  0,  0,  0,  0,  0,  // UDF
        0,  3,  3,  3,  3,  3,  3,  3,  // OTH
@@ -92,7 +92,7 @@
     ];
 })();
 
-jschardet.Latin1Prober = function() {
+jschardet.MacRomanProber = function() {
     jschardet.CharSetProber.apply(this);
 
     var FREQ_CAT_NUM = 4;
@@ -107,19 +107,19 @@ jschardet.Latin1Prober = function() {
         this._mLastCharClass = jschardet.OTH;
         this._mFreqCounter = [];
         for( var i = 0; i < FREQ_CAT_NUM; this._mFreqCounter[i++] = 0 );
-        jschardet.Latin1Prober.prototype.reset.apply(this);
+        jschardet.MacRomanProber.prototype.reset.apply(this);
     }
 
     this.getCharsetName = function() {
-        return "windows-1252";
+        return "macRoman";
     }
 
     this.feed = function(aBuf) {
         aBuf = this.filterWithEnglishLetters(aBuf);
         for( var i = 0; i < aBuf.length; i++ ) {
             var c = aBuf.charCodeAt(i);
-            var charClass = jschardet.Latin1_CharToClass[c];
-            var freq = jschardet.Latin1ClassModel[(this._mLastCharClass * CLASS_NUM) + charClass];
+            var charClass = jschardet.MacRoman_CharToClass[c];
+            var freq = jschardet.MacRomanClassModel[(this._mLastCharClass * CLASS_NUM) + charClass];
             if( freq == 0 ) {
                 this._mState = jschardet.Constants.notMe;
                 break;
@@ -151,16 +151,16 @@ jschardet.Latin1Prober = function() {
         if( confidence < 0 ) {
             confidence = 0.0;
         }
-        // lower the confidence of latin1 so that other more accurate detector
+        // lower the confidence of macroman so that other more accurate detector
         // can take priority.
         //
-        // antonio.afonso: need to change this otherwise languages like pt, es, fr using latin1 will never be detected.
-        confidence = confidence * jschardet.Constants.LATIN1_CONFIDENCE_CORRECTION_FACTOR;
+        // antonio.afonso: need to change this otherwise languages like pt, es, fr using macroman will never be detected.
+        confidence = confidence * jschardet.Constants.MACROMAN_CONFIDENCE_CORRECTION_FACTOR;
         return confidence;
     }
 
     init();
 }
-jschardet.Latin1Prober.prototype = new jschardet.CharSetProber();
+jschardet.MacRomanProber.prototype = new jschardet.CharSetProber();
 
 }(require('./init'));

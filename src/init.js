@@ -61,6 +61,7 @@ require('./langhebrewmodel');
 require('./langhungarianmodel');
 require('./sbcsgroupprober');
 require('./latin1prober');
+require('./macromanprober');
 require('./escprober');
 require('./universaldetector');
 

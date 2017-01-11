@@ -41,7 +41,9 @@ jschardet.Constants = {
     itsMe       : 2,
 
     MINIMUM_THRESHOLD   : 0.20,
-    SHORTCUT_THRESHOLD  : 0.95
+    SHORTCUT_THRESHOLD  : 0.95,
+    LATIN1_CONFIDENCE_CORRECTION_FACTOR  : 0.95,
+    MACROMAN_CONFIDENCE_CORRECTION_FACTOR  : 0.95
 };
 
 }(require('./init'));
