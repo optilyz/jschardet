@@ -46,8 +46,8 @@ jschardet.SBCSGroupProber = function() {
             new jschardet.SingleByteCharSetProber(jschardet.Win1253GreekModel),
             new jschardet.SingleByteCharSetProber(jschardet.Latin5BulgarianModel),
             new jschardet.SingleByteCharSetProber(jschardet.Win1251BulgarianModel),
-            new jschardet.SingleByteCharSetProber(jschardet.Latin2HungarianModel),
-            new jschardet.SingleByteCharSetProber(jschardet.Win1250HungarianModel),
+            // new jschardet.SingleByteCharSetProber(jschardet.Latin2HungarianModel),
+            // new jschardet.SingleByteCharSetProber(jschardet.Win1250HungarianModel),
             new jschardet.SingleByteCharSetProber(jschardet.TIS620ThaiModel)
         ];
         var hebrewProber = new jschardet.HebrewProber();
